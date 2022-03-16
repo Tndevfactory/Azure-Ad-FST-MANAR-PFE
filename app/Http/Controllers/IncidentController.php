@@ -12,9 +12,10 @@ class IncidentController extends Controller
 
         $data =[
             'incident' => 'issue in biat server ...' ,
-            'date' => Carbon::now(),
-            'issuer' => 'Marwa',
-        ]
+          'date' => Carbon::now(),
+          'issuer'=> 'Marwa',
+
+        ];
 
 
          return response()->json($data, 200);
