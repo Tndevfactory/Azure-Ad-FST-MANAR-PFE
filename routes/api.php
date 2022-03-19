@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\IncidentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,8 @@ use App\Http\Controllers\IncidentController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// login zone
+Route::get('login', [LoginController::class, 'login'])->name('login');
 
-Route::get('tracer-index', [IncidentController::class, 'incidentHome'])->name('tracer-index');
+// inciden log zone 
+Route::get('incident-all', [IncidentController::class, 'IncidentAll'])->name('incident-all');
