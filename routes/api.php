@@ -17,8 +17,9 @@ use App\Http\Controllers\Api\IncidentController;
 |
 */
 
-// login zone
+// login zone----
+
 Route::get('login', [LoginController::class, 'login'])->name('login');
 
-// inciden log zone 
+// inciden log zone
 Route::get('incident-all', [IncidentController::class, 'IncidentAll'])->name('incident-all');
