@@ -11,20 +11,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class LoginController extends Controller
 {
 
  public function register(Request $request)
  {
-
-
+  
 
    $validator = Validator::make($request->all(), [
-     "nom" => "required|max:55",
-     "prenom" => "required|max:55",
-     "adresse" => "nullable",
-     "phone" => "nullable",
+     "lname" => "required|max:55",
+     "fname" => "required|max:55",
+     "address" => "nullable",
+     "fonction" => "required",
+     "group" => "required",
+     "phone1" => "required",
+     "phone2" => "nullable",
      "email" => "email|required|unique:users",
      "password" => "required|confirmed",
       ]);
@@ -43,11 +46,18 @@ class LoginController extends Controller
 
    $validated = $validator->validated();
 
-   $validated["nom"] = Str::lower($request->nom);
+  
+
+   $validated["fname"] = Str::lower($validated["fname"] );
+   $validated["lname"] = Str::lower($validated["lname"] );
    $validated["password"] = bcrypt($request->password);
+   $output->writeln('ch debug validated after hash');
+   $output->writeln($validated);
 
    $user = User::create($validated);
 
+   
+   
    $accessToken = $user->createToken("authToken")->accessToken;
 
    $data = [
@@ -57,6 +67,7 @@ class LoginController extends Controller
        return response()->json($data,200);
 
  }
+ 
 
  public function login(Request $request)
  {
@@ -80,7 +91,7 @@ class LoginController extends Controller
 
     $validated = $validator->safe()->only(['email', 'password']);
 
-
+    
    if (!auth()->attempt($validated)) {
      $data = [ "error" => 'not authentified',   "response_code" => 403, ];
          return response()->json($data,200);
@@ -89,7 +100,7 @@ class LoginController extends Controller
    $accessToken = auth()->user()->createToken("authToken")->accessToken;
 
       $data = [
-        "user" => $user,
+        "user" => auth()->user(),
         "access_token" => $accessToken,
       ];
           return response()->json($data,200);
@@ -99,14 +110,41 @@ class LoginController extends Controller
 
  public function logout(Request $request)
  {
+  $output = new ConsoleOutput();
+  $output->writeln('ch debug logout');
+  
+  $output->writeln($request->all());
+  $output->writeln(Auth::check());
+
 
    if (Auth::check()) {
      $logoutStatus = Auth::user()->token()->revoke();
 
      $data = [
-       "logout" => 'logout successfuly',
+       "backend_response" => 'logout successfuly',
+       "response_code" => 200,
        ];
          return response()->json($data,200);
+   }else{
+    $data = [
+      "backend_response" => 'non authentified',
+      "response_code" => 403,
+      ];
+        return response()->json($data,200);
    }
 
+}
+ public function users(Request $request)
+ {
+
+   $users=User::get();
+
+     $data = [
+       "users" => $users,
+       ];
+
+         return response()->json($data,200);
+   
+
+}
 }

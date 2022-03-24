@@ -17,9 +17,11 @@ use App\Http\Controllers\Api\IncidentController;
 |
 */
 
-// login zone----
+// auth zone----
+Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::post('register', [LoginController::class, 'register'])->name('register');
+Route::get('logout', [LoginController::class, 'logout'])->middleware('auth:api')->name('logout');
+Route::get('users', [LoginController::class, 'users'])->middleware('auth:api')->name('users');
 
-Route::get('login', [LoginController::class, 'login'])->name('login');
-
-// inciden log zone
+// incidents  zone
 Route::get('incident-all', [IncidentController::class, 'IncidentAll'])->name('incident-all');

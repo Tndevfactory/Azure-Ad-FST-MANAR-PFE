@@ -23,12 +23,10 @@ return new class extends Migration
             $table->string('password');
             $table->string('address');
             $table->string('fonction');
-            $table->enum('group', ['candy', 'globalnet', 'autre']);  
+            $table->enum('group', ['candy', 'globalnet', 'autre'])->default('globalnet');  
             $table->string('phone1');
             $table->string('phone2')->nullable();
-
             $table->rememberToken();
-
             $table->timestamps();
         });
     }
