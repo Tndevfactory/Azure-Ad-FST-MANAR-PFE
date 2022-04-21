@@ -1,27 +1,31 @@
 <?php
 
+
+use App\Http\Controllers\CalendrierController;
+use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\InterventionController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ValidationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\IncidentController;
 
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-// auth zone----
-Route::post('login', [LoginController::class, 'login'])->name('login');
-Route::post('register', [LoginController::class, 'register'])->name('register');
-Route::get('logout', [LoginController::class, 'logout'])->middleware('auth:api')->name('logout');
-Route::get('users', [LoginController::class, 'users'])->middleware('auth:api')->name('users');
+// auth zone
+Route::post('login', [LoginController::class, 'apiLogin']);
+Route::post('register', [LoginController::class, 'apiRegister']);
+Route::get('logout', [LoginController::class, 'apiLogout'])->middleware('auth:api');
+Route::get('users', [LoginController::class, 'apiUsers'])->middleware('auth:api');
+
+
+// Calendrier zone
+Route::get('calendrier-all', [CalendrierController::class, 'apiCalendrierAll']);
 
 // incidents  zone
-Route::get('incident-all', [IncidentController::class, 'IncidentAll'])->name('incident-all');
+Route::get('incidents-all', [IncidentController::class, 'apiIncidentsAll']);
+
+// interventions zone
+Route::get('interventions-all', [InterventionController::class, 'apiInterventionsAll']);
+
+// validations zone
+Route::get('validations-all', [ValidationController::class, 'apiValidationsAll']);
