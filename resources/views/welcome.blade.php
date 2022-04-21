@@ -21,14 +21,14 @@
             .server{
                 background-image: url('server.webp');
                 background-size: cover;
-                height:100vh;
+                height:10vh;
                 overflow: hidden;
             }
         </style>
     </head>
     <body class="antialiased">
         <div class="server relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-
+            heroku backend branch
         </div>
     </body>
 </html>
