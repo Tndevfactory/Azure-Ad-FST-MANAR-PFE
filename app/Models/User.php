@@ -26,7 +26,7 @@ class User extends Authenticatable
         'phone1',
         'phone2',
         'group',
-        'fonction',
+        'role',
     ];
 
     /**
@@ -47,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function incidents(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Incident::class);
+    }
 }

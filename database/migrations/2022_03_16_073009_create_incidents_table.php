@@ -14,19 +14,27 @@ return new class extends Migration
     public function up()
     {
         Schema::create('incidents', function (Blueprint $table) {
-            $table->id();  
-            $table->string('name');
-            $table->string('description');
-            $table->string('num_serie_machine');
-            $table->string('nom_machine');
-            $table->string('issue_duration');
-            $table->string('raison_issue_duration'); 
-            $table->string('raison_assignation'); 
-            $table->string('assignation'); 
-            $table->string('type');   
-            $table->string('statut'); 
-            $table->string('priorite'); 
-            $table->foreignId('user_id'); 
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('sujet')->nullable();
+            $table->string('description')->nullable();
+            $table->string('num_contrat')->nullable();
+            $table->string('num_serie_machine')->nullable();
+            $table->string('type_prestation')->nullable();
+            $table->string('issue_duration')->nullable();
+            $table->string('raison_issue_duration')->nullable();
+            $table->string('raison_assignation')->nullable();
+            $table->string('assignation')->nullable();
+            $table->string('type')->nullable();
+            $table->string('statut')->nullable();
+            $table->string('priorite')->nullable();
+            $table->enum('nature', ['incident', 'intervention', 'autre'])->default('incident');
+            $table->string('origine')->nullable();
+            $table->string('client')->nullable();
+            $table->string('contact_tel')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_name')->nullable();
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

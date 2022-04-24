@@ -23,6 +23,9 @@ Route::get('calendrier-all', [CalendrierController::class, 'apiCalendrierAll']);
 
 // incidents  zone
 Route::get('incidents-all', [IncidentController::class, 'apiIncidentsAll']);
+Route::delete('incident-delete', [IncidentController::class, 'apiIncidentDelete']);
+Route::post('incident-create', [IncidentController::class, 'apiIncidentCreate']);
+Route::put('incident-update', [IncidentController::class, 'apiIncidentUpdate']);
 
 // interventions zone
 Route::get('interventions-all', [InterventionController::class, 'apiInterventionsAll']);

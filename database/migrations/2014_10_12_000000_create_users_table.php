@@ -22,8 +22,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address');
-            $table->string('fonction');
-            $table->enum('group', ['candy', 'globalnet', 'autre'])->default('globalnet');  
+            $table->string('role');
+            $table->enum('group', ['candy', 'globalnet', 'autre'])->default('globalnet');
             $table->string('phone1');
             $table->string('phone2')->nullable();
             $table->rememberToken();

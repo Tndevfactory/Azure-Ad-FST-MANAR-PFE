@@ -21,7 +21,7 @@ class LoginController extends Controller
             "lname" => "required|max:55",
             "fname" => "required|max:55",
             "address" => "nullable",
-            "fonction" => "required",
+            "role" => "required",
             "group" => "required",
             "phone1" => "required",
             "phone2" => "nullable",
@@ -31,27 +31,25 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
 
-            $data=[
+            $data = [
                 "user" => null,
                 "access_token" => null,
                 "backend_response" => Arr::first(Arr::flatten($validator->messages()->get('*'))),
                 "response_code" => 403,
             ];
-            return response()->json($data,243);
+            return response()->json($data, 243);
         }
 
 
         $validated = $validator->validated();
 
 
-
-        $validated["fname"] = Str::lower($validated["fname"] );
-        $validated["lname"] = Str::lower($validated["lname"] );
+        $validated["fname"] = Str::lower($validated["fname"]);
+        $validated["lname"] = Str::lower($validated["lname"]);
         $validated["password"] = bcrypt($request->password);
 
 
         $user = User::create($validated);
-
 
 
         $accessToken = $user->createToken("authToken")->accessToken;
@@ -59,8 +57,9 @@ class LoginController extends Controller
         $data = [
             "user" => $user,
             "access_token" => $accessToken,
+            "response_code" => 200,
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
 
     }
 
@@ -76,21 +75,21 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
 
-            $data=[
+            $data = [
                 "user" => null,
                 "access_token" => null,
                 "backend_response" => Arr::first(Arr::flatten($validator->messages()->get('*'))),
                 "response_code" => 403,
             ];
-            return response()->json($data,243);
+            return response()->json($data, 243);
         }
 
         $validated = $validator->safe()->only(['email', 'password']);
 
 
         if (!auth()->attempt($validated)) {
-            $data = [ "error" => 'Erreur dans le mot de passe ou email',   "response_code" => 403, ];
-            return response()->json($data,200);
+            $data = ["error" => 'Erreur dans le mot de passe ou email', "response_code" => 403,];
+            return response()->json($data, 200);
         }
 
         $accessToken = auth()->user()->createToken("authToken")->accessToken;
@@ -99,7 +98,7 @@ class LoginController extends Controller
             "user" => auth()->user(),
             "access_token" => $accessToken,
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
 
     }
 
@@ -120,26 +119,28 @@ class LoginController extends Controller
                 "backend_response" => 'logout successfuly',
                 "response_code" => 200,
             ];
-            return response()->json($data,200);
-        }else{
+            return response()->json($data, 200);
+        } else {
             $data = [
                 "backend_response" => 'non authentified',
                 "response_code" => 403,
             ];
-            return response()->json($data,200);
+            return response()->json($data, 200);
         }
 
     }
+
     public function apiUsers(Request $request): \Illuminate\Http\JsonResponse
     {
 
-        $users=User::get();
+        $users = User::get();
 
         $data = [
             "users" => $users,
+            "response_code" => 200,
         ];
 
-        return response()->json($data,200);
+        return response()->json($data, 200);
 
 
     }
