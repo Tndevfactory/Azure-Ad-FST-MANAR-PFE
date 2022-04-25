@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Incident;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -40,8 +41,8 @@ class IncidentController extends Controller
         $incident->contact_tel = $request->contact_tel;
         $incident->contact_email = $request->contact_email;
         $incident->contact_name = $request->contact_name;
-        $incident->created_at= $request->created_at;
-        $incident->user_id= $request->user_id;
+        $incident->created_at = Carbon::parse($request->created_at)->format('Y-m-d\TH:i');
+        $incident->user_id = $request->user_id;
         $incident->save();
 
         $data = [
