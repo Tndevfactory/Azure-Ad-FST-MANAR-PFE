@@ -13,7 +13,7 @@ class IncidentController extends Controller
 
     public function apiIncidentsAll()
     {
-        return Incident::orderBy('created_at','DESC')->get()->toArray();
+        return Incident::orderBy('created_at', 'DESC')->get();
 
     }
 
