@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Incident extends Model
 {
@@ -13,31 +14,32 @@ class Incident extends Model
 
     protected $fillable = [
 
-        'name',
+        'titre',
         'sujet',
         'description',
-        'num_contrat',
-        'num_serie_machine',
+        'num_contrat_maintenance',
+        'num_serie',
         'type_prestation',
         'issue_duration',
         'raison_issue_duration',
         'raison_assignation',
         'assignation',
         'type',
+        'ask_to_close',
         'statut',
         'priorite',
         'nature',
         'origine',
         'client',
-        'contact_tel',
+        'num_tel_contact',
         'contact_email',
-        'contact_name',
+        'nom_contact',
         'user_id',
 
 
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

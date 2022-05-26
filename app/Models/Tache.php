@@ -6,10 +6,11 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Intervention extends Model
+class Tache extends Model
 {
     use HasFactory;
     protected $fillable = [
+       
         'sujet',
         'compte',
         'date_echeance',
@@ -18,14 +19,14 @@ class Intervention extends Model
         'code_contrat',
         'contrat_maintenance',
         'date_appel',
-        'date_intervention',
+        'date_tache',
         'type',
         'user_id',
-        
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+   
 }

@@ -9,11 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
-     */ 
+     * @return void 
+     */
     public function up()
     {
-        Schema::create('interventions', function (Blueprint $table) {
+        Schema::create('taches', function (Blueprint $table) {
             $table->id();
             $table->string('sujet')->nullable();
             $table->string('compte')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('code_contrat')->nullable();
             $table->string('contrat_maintenance')->nullable();
             $table->dateTime('date_appel')->nullable();
-            $table->dateTime('date_intervention')->nullable();
+            $table->dateTime('date_tache')->nullable();
             $table->string('type')->nullable();
             $table->string('note')->nullable();
             $table->foreignId('user_id');
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interventions');
+        Schema::dropIfExists('taches');
     }
 };
