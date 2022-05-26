@@ -66,7 +66,7 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('postgres://oncoltealslsyb:84d71e11d37f8eff1f1a945d4814fcbb1b8036d8c3d4baec0fe22cfad994ab10@ec2-34-198-189-252.compute-1.amazonaws.com:5432/ddm3osa4l0mn43'),
-            'host' => env('DB_HOST', 'ec2-34-198-189-252.compute-1.amazonaws.com'),
+            'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'ddm3osa4l0mn43'),
             'username' => env('DB_USERNAME', 'oncoltealslsyb'),
