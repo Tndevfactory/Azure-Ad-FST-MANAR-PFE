@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreInterventionRequest;
-use App\Http\Requests\UpdateInterventionRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use App\Models\Intervention;
 
 class InterventionController extends Controller
@@ -13,9 +15,10 @@ class InterventionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiInterventionsAll()
+    public function apiGetInterventions()
     {
-        return 'apiInterventionsAll';
+        return Intervention::with('user')->orderBy('created_at', 'DESC')->get();
+
     }
 
 }

@@ -1,13 +1,14 @@
 <?php
 
 
-use App\Http\Controllers\CalendrierController;
-use App\Http\Controllers\IncidentController;
-use App\Http\Controllers\InterventionController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ValidationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TacheController;
+use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\CalendrierController;
+use App\Http\Controllers\ValidationController;
+use App\Http\Controllers\InterventionController;
 
 
 
@@ -28,7 +29,11 @@ Route::post('incident-create', [IncidentController::class, 'apiIncidentCreate'])
 Route::put('incident-update', [IncidentController::class, 'apiIncidentUpdate']);
 
 // interventions zone
-Route::get('interventions-all', [InterventionController::class, 'apiInterventionsAll']);
+Route::get('interventions-all', [InterventionController::class, 'apiGetInterventions']);
+
+// Taches zone
+Route::get('taches-all', [TacheController::class, 'apiGetTaches']);
 
 // validations zone
-Route::get('validations-all', [ValidationController::class, 'apiValidationsAll']);
+Route::get('validations-all', [ValidationController::class, 'apiGetIncidentForClosing']);
+Route::put('close-intervention', [ValidationController::class, 'apiCloseIntervention']);
